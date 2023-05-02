@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Upcoming Appointments</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Staff</th>
+        <th>Date and Time</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for appointment in appointments %}
+        <tr>
+          <td>{{ appointment.staff_member.name }}</td>
+          <td>{{ appointment.date_time|date:"F d, Y H:i" }}</td>
+          <td>
+            <a href="{% url 'appointments:reschedule_appointment' appointment.id %}">Reschedule</a> |
+            <a href="{% url 'appointments:cancel_appointment' appointment.id %}">Cancel</a>
+          </td>
+        </tr>
+      {% endfor %}
+      {% if not appointments %}
+        <tr>
+          <td colspan="3">No upcoming appointments.</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+{% endblock %}

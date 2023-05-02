@@ -1,0 +1,31 @@
+{% extends 'appointments/base.html' %}
+
+{% block content %}
+  <h1>Invoices</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Invoice ID</th>
+        <th>Appointment ID</th>
+        <th>Date Created</th>
+        <th>Date Due</th>
+        <th>Amount Due</th>
+        <th>Paid?</th>
+        <th>Date Paid</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for invoice in invoices %}
+        <tr>
+          <td>{{ invoice.pk }}</td>
+          <td>{{ invoice.appointment.pk }}</td>
+          <td>{{ invoice.date_created }}</td>
+          <td>{{ invoice.date_due }}</td>
+          <td>{{ invoice.amount_due }}</td>
+          <td>{{ invoice.is_paid }}</td>
+          <td>{{ invoice.date_paid }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

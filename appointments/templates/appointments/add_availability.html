@@ -1,0 +1,11 @@
+{% extends "appointments/base.html" %}
+
+{% block content %}
+<h2>Add Availability for {{ staff.user.get_full_name }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Availability</button>
+</form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'appointments/base.html' %}
+
+{% block content %}
+    <h1>Invoice #{{ invoice.id }}</h1>
+    <p>Appointment: {{ invoice.appointment }}</p>
+    <p>Amount: {{ invoice.amount }}</p>
+    <p>Payment Status: {{ invoice.get_payment_status_display }}</p>
+    <p>Payment Method: {{ invoice.get_payment_method_display }}</p>
+    <p>Created At: {{ invoice.created_at }}</p>
+{% endblock %}

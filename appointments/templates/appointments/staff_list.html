@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Select Staff</h1>
+    <ul>
+        {% for staff in staff_list %}
+            <li>
+                <a href="{% url 'appointments:book_appointment' staff_id=staff.user.pk %}">{{ staff }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

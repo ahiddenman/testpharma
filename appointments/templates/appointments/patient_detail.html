@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <h2 class="mt-4 mb-4">Patient Details</h2>
+
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <strong>Name:</strong> {{ patient.first_name }} {{ patient.last_name }}
+      </div>
+      <div class="col-md-6">
+        <strong>Phone:</strong> {{ patient.phone }}
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <strong>Email:</strong> {{ patient.email }}
+      </div>
+    </div>
+
+    <h3>Appointment History</h3>
+    {% if appointments %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Reason</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for appointment in appointments %}
+        <tr>
+          <td>{{ appointment.date }}</td>
+          <td>{{ appointment.time }}</td>
+          <td>{{ appointment.reason }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>No appointments found.</p>
+    {% endif %}
+
+    <!-- Add the notes section -->
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <h3>Notes</h3>
+        <p>{{ patient.notes|linebreaks }}</p>
+      </div>
+    </div>
+
+    <!-- Add a Back button -->
+    <a href="{% url 'appointments:patient_list' %}" class="btn btn-primary">Back to Patients</a>
+  </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'appointments/base.html' %}
+
+{% block content %}
+    <h1>Select a Pharmacy for {{ service.name }}</h1>
+    <ul>
+    {% for pharmacy in pharmacies %}
+        <li><a href="{% url 'appointments:book_appointment' pharmacy.id service.id %}">{{ pharmacy.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

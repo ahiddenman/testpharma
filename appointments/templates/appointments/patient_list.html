@@ -1,0 +1,42 @@
+{% extends "appointments/base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <h2>Patient List</h2>
+    <!-- Display the total patients -->
+    <p>Total Patients: {{ patients.count }}</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+                {% if patient.user %}
+                    <tr>
+                        <td>{{ patient.id }}</td>
+                        <td>{{ patient.first_name }} {{ patient.last_name }}</td>
+                        <td>{{ patient.phone }}</td>
+                        <td>{{ patient.user.email }}</td>
+                        <td>
+                            <a href="{% url 'appointments:patient_detail' pk=patient.user.id %}">View</a>
+            <a href="{% url 'appointments:patient_update' pk=patient.user.id %}">Edit</a>
+            <a href="{% url 'appointments:patient_delete' pk=patient.user.id %}">Delete</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% empty %}
+                <tr>
+                    <td colspan="5">No patients.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'appointments:patient_create' %}" class="btn btn-primary">Add New Patient</a>
+{% endblock %}

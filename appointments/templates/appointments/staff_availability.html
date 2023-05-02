@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Staff Availability</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Staff</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for availability in availabilities %}
+        <tr>
+          <td>{{ availability.staff }}</td>
+          <td>{{ availability.start_time }}</td>
+          <td>{{ availability.end_time }}</td>
+          <td>
+            <a href="{% url 'appointments:edit_availability' availability.id %}">Edit</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% for staff in staff_list %}
+    <tr>
+        <td>{{ staff.name }}</td>
+        <td>
+            <!-- Make sure you're passing the staff_id here -->
+            <a href="{% url 'appointments:add_availability' staff.id %}">Add Availability</a>
+        </td>
+    </tr>
+{% endfor %}
+
+{% endblock %}

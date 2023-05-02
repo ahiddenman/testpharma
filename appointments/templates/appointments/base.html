@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fylo Health Appointments</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <!-- Add Bootstrap CSS -->
+    <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0-alpha1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/5v5z1C1Iv8E9TITnpGnpUgDb1jNfj7S4M4xF9X"
+  crossorigin="anonymous"
+>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">Fylo Health</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'appointments:appointment_management' %}">Appointment Management</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'appointments:calendar_view' %}">Calendar View</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'appointments:staff_availability' %}">Staff Availability</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'appointments:create_appointment' %}">Create Appointment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'appointments:patient_list' %}">Patient Management</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'appointments:invoice_list' %}">Invoices</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'appointments:upcoming_appointments' %}">Upcoming Appointments</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+  </div>
+  <!-- Add Bootstrap JS and jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-2/opw4tz/tOekoFNbz74DpR4F0rt/RtB9YihXZtoU17O/RFRd1wFnlJ++94QyE/" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gdaflkfY9GKWpZm7m+Rm6z6+hes3b1Mi3otQ/64vZZzD5Y1X9P8rvbsgrR/" crossorigin="anonymous"></script>
+</body>
+</html>
