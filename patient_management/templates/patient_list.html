@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Patient List</h1>
+    <form method="GET">
+        {{ form }}
+        <button type="submit">Search</button>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+                <tr>
+                    <td>{{ patient.id }}</td>
+                    <td>{{ patient.first_name }} {{ patient.last_name }}</td>
+                    <td>{{ patient.phone_number }}</td>
+                    <td>{{ patient.email }}</td>
+                    <td>
+                        <a href="{% url 'appointments:patient_detail' patient.pk %}">View</a>
+                        <a href="{% url 'appointments:patient_update' patient.pk %}">Edit</a>
+                        <a href="{% url 'appointments:patient_delete' patient.pk %}">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No patients.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
